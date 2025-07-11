@@ -1,0 +1,8 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: dev_route
+          uri: lb://myservice
+          predicates:
+            - Path=/dev/myservice/**
