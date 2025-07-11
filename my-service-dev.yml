@@ -1,0 +1,13 @@
+# myservice-dev.yml
+spring:
+  profiles: dev
+  application:
+    name: myservice
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: root
+
+server:
+  port: 8181
