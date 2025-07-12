@@ -1,6 +1,13 @@
 spring:
   cloud:
     gateway:
+      routes:
+        - id: servicetest
+          uri: lb://SERVICETEST
+          predicates:
+            - Path=/api/servicetest/**
+          filters:
+            - StripPrefix=2
       discovery:
         locator:
           enabled: true
