@@ -1,0 +1,9 @@
+spring:
+  application:
+    name: servicetest
+
+server:
+  port: 8082
+
+custom:
+  greeting: "Hello from the service default config!"
