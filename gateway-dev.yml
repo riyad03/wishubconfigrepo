@@ -1,8 +1,43 @@
 spring:
   cloud:
     gateway:
-      routes:
-        - id: dev_route
-          uri: lb://myservice
+      discovery:
+        locator:
+          enabled: true
+          lower-case-service-id: true
           predicates:
-            - Path=/dev/myservice/**
+            - name: Path
+              args:
+                pattern: "'/api/' + serviceId + '/**'"
+          filters:
+            - name: StripPrefix
+              args:
+                parts: 2
+
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+    fetch-registry: true
+    register-with-eureka: true
+    registry-fetch-interval-seconds: 30
+  instance:
+    prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 10
+    lease-expiration-duration-in-seconds: 30
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,gateway,routes
+  endpoint:
+    health:
+      show-details: always
+
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    org.springframework.cloud.netflix.eureka: DEBUG
+    root: INFO
