@@ -1,15 +1,19 @@
 spring:
   cloud:
     gateway:
+      mvc:
+        routes: []  # Keep empty to allow discovery locator
       discovery:
         locator:
           enabled: true
           lower-case-service-id: true
-          predicates:
+          route-id-prefix: "mvc-"
+          url-expression: "'lb://' + serviceId"
+          predicate-factories:
             - name: Path
               args:
                 pattern: /api/{serviceId}/**
-          filters:
+          filter-factories:
             - name: StripPrefix
               args:
                 parts: 2
