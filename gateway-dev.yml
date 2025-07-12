@@ -1,31 +1,23 @@
+server:
+  port: 8081
+
 spring:
+  application:
+    name: gateway
   cloud:
     gateway:
       mvc:
-        routes: []  # Keep empty to allow discovery locator
-      discovery:
-        locator:
-          enabled: true
-          lower-case-service-id: true
-          route-id-prefix: "mvc-"
-          url-expression: "'lb://' + serviceId"
-          predicate-factories:
-            - name: Path
-              args:
-                pattern: /api/{serviceId}/**
-          filter-factories:
-            - name: StripPrefix
-              args:
-                parts: 2
-      routes:
-        - id: servicetest
-          uri: lb://SERVICETEST
-          predicates:
-            - Path=/api/servicetest/**
-          filters:
-            - StripPrefix=2
-      
-
+        routes:
+          - id: servicetest
+            uri: lb://servicetest
+            predicates:
+              - name: Path
+                args:
+                  pattern: /api/servicetest/**
+            filters:
+              - name: StripPrefix
+                args:
+                  parts: 2
 
 eureka:
   client:
@@ -33,23 +25,16 @@ eureka:
       defaultZone: http://localhost:8761/eureka/
     fetch-registry: true
     register-with-eureka: true
-    registry-fetch-interval-seconds: 30
   instance:
     prefer-ip-address: true
-    lease-renewal-interval-in-seconds: 10
-    lease-expiration-duration-in-seconds: 30
 
 management:
   endpoints:
     web:
       exposure:
-        include: health,info,gateway,routes
-  endpoint:
-    health:
-      show-details: always
+        include: "*"
 
 logging:
   level:
     org.springframework.cloud.gateway: DEBUG
-    org.springframework.cloud.netflix.eureka: DEBUG
-    root: INFO
+    org.springframework.web: DEBUG
