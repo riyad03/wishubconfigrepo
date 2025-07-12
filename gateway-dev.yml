@@ -8,7 +8,7 @@ spring:
           predicates:
             - name: Path
               args:
-                pattern: "/api/${serviceId}/**"
+                pattern: /api/${serviceId}/**
           filters:
             - name: StripPrefix
               args:
