@@ -6,11 +6,10 @@ spring:
     name: gateway
   cloud:
     gateway:
-      mvc:
-        discovery:
-          locator:
-            enabled: true
-            lowerCaseServiceId: true
+      discovery:
+        locator:
+          enabled: true
+          lowerCaseServiceId: true
 
 eureka:
   client:
