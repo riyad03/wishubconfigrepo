@@ -7,17 +7,7 @@ spring:
   cloud:
     gateway:
       mvc:
-        routes:
-          - id: datamanager-route
-            uri: lb://DATAMANAGER  # Change to uppercase
-            predicates:
-              - Path=/datamanager/**
-            filters:
-              - StripPrefix=1
-          - id: datamanager-direct-test
-            uri: lb://DATAMANAGER  # Change to uppercase
-            predicates:
-              - Path=/test
+        
       discovery:
         locator:
           enabled: true
