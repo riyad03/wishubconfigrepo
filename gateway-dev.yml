@@ -14,10 +14,12 @@ spring:
                 - Path=/datamanager/**
               filters:
                 - StripPrefix=1
-            - id: datamanager-direct-test
-              uri: lb://DATAMANAGER  #
+            - id: servicetest-route
+              uri: lb://SERVICETEST
               predicates:
-                - Path=/test
+                -Path=/servicetest/**
+              filters:
+                -StripPrefix=1
       discovery:
         locator:
           enabled: true
