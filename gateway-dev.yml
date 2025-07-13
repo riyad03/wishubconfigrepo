@@ -6,43 +6,48 @@ spring:
     name: gateway
   cloud:
     gateway:
+      mvc:
+        routes:
+          - id: datamanager-route
+            uri: lb://datamanager
+            predicates:
+              - Path=/datamanager/**
+            filters:
+              - StripPrefix=1
+          - id: datamanager-direct-test
+            uri: lb://datamanager
+            predicates:
+              - Path=/test
       discovery:
         locator:
           enabled: true
           lower-case-service-id: true
-          # Remove the filters from here - they apply to all routes
-      routes:
-        - id: datamanager-route
-          uri: lb://datamanager
-          predicates:
-            - Path=/datamanager/**
-          filters:
-            - StripPrefix=1
-        # Add explicit route for better control
-        - id: datamanager-direct
-          uri: lb://datamanager
-          predicates:
-            - Path=/api/datamanager/**
-          filters:
-            - StripPrefix=2
-          
+
 eureka:
   client:
     service-url:
       defaultZone: http://localhost:8761/eureka/
     fetch-registry: true
     register-with-eureka: true
+    registry-fetch-interval-seconds: 5
   instance:
     prefer-ip-address: true
+    lease-renewal-interval-in-seconds: 10
+    lease-expiration-duration-in-seconds: 30
 
 management:
   endpoints:
     web:
       exposure:
         include: "*"
+  endpoint:
+    health:
+      show-details: always
 
 logging:
   level:
     org.springframework.cloud.gateway: DEBUG
     org.springframework.web: DEBUG
-    org.springframework.cloud.gateway.discovery: DEBUG
+    org.springframework.cloud.gateway.mvc: DEBUG
+    org.springframework.cloud.loadbalancer: DEBUG
+    com.netflix.discovery: DEBUG
