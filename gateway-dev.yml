@@ -7,17 +7,10 @@ spring:
   cloud:
     gateway:
       mvc:
-        routes:
-          - id: servicetest
-            uri: lb://servicetest
-            predicates:
-              - name: Path
-                args:
-                  pattern: /api/servicetest/**
-            filters:
-              - name: StripPrefix
-                args:
-                  parts: 2
+        discovery:
+          locator:
+            enabled: true
+            lowerCaseServiceId: true
 
 eureka:
   client:
