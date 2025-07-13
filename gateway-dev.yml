@@ -10,8 +10,21 @@ spring:
         locator:
           enabled: true
           lower-case-service-id: true
+          # Remove the filters from here - they apply to all routes
+      routes:
+        - id: datamanager-route
+          uri: lb://datamanager
+          predicates:
+            - Path=/datamanager/**
           filters:
-            - StripPrefix=1  # Removes /datamanager from path
+            - StripPrefix=1
+        # Add explicit route for better control
+        - id: datamanager-direct
+          uri: lb://datamanager
+          predicates:
+            - Path=/api/datamanager/**
+          filters:
+            - StripPrefix=2
           
 eureka:
   client:
