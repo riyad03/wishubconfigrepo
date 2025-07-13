@@ -17,9 +17,9 @@ spring:
             - id: servicetest-route
               uri: lb://SERVICETEST
               predicates:
-                -Path=/servicetest/**
+                - Path=/servicetest/**
               filters:
-                -StripPrefix=1
+                - StripPrefix=1
       discovery:
         locator:
           enabled: true
