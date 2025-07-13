@@ -6,8 +6,18 @@ spring:
     name: gateway
   cloud:
     gateway:
-      
-        
+      mvc:
+        routes:
+            - id: datamanager-route
+              uri: lb://DATAMANAGER 
+              predicates:
+                - Path=/datamanager/**
+              filters:
+                - StripPrefix=1
+            - id: datamanager-direct-test
+              uri: lb://DATAMANAGER  #
+              predicates:
+                - Path=/test
       discovery:
         locator:
           enabled: true
