@@ -9,13 +9,13 @@ spring:
       mvc:
         routes:
           - id: datamanager-route
-            uri: lb://datamanager
+            uri: lb://DATAMANAGER  # Change to uppercase
             predicates:
               - Path=/datamanager/**
             filters:
               - StripPrefix=1
           - id: datamanager-direct-test
-            uri: lb://datamanager
+            uri: lb://DATAMANAGER  # Change to uppercase
             predicates:
               - Path=/test
       discovery:
