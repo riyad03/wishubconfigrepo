@@ -6,7 +6,7 @@ spring:
     name: gateway
   cloud:
     gateway:
-      mvc:
+      
         
       discovery:
         locator:
