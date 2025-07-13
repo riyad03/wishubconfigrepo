@@ -1,0 +1,8 @@
+service:
+  name: datamanager
+  port: 8083
+  host: localhost
+
+app:
+  name: datamanager
+  version: 1.0.0
