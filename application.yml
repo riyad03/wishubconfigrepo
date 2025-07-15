@@ -1,8 +1,10 @@
 # application.yml
 logging:
   level:
-    root: INFO
-    org.springframework.web: DEBUG
+    org.springframework.cloud.gateway: DEBUG
+    reactor.netty.http.server.HttpServer: DEBUG
+    reactor.netty.http.client.HttpClient: DEBUG
+
 
 eureka:
   client:
