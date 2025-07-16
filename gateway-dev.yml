@@ -6,20 +6,19 @@ spring:
     name: gateway
   cloud:
     gateway:
-      mvc:
-        routes:
-            - id: datamanager-route
-              uri: lb://DATAMANAGER 
-              predicates:
-                - Path=/datamanager/**
-              filters:
-                - StripPrefix=1
-            - id: servicetest-route
-              uri: lb://SERVICETEST
-              predicates:
-                - Path=/servicetest/**
-              filters:
-                - StripPrefix=1
+      routes:
+          - id: datamanager-route
+            uri: lb://DATAMANAGER 
+            predicates:
+              - Path=/datamanager/**
+            filters:
+              - StripPrefix=1
+          - id: servicetest-route
+            uri: lb://SERVICETEST
+            predicates:
+              - Path=/servicetest/**
+            filters:
+              - StripPrefix=1
       discovery:
         locator:
           enabled: true
