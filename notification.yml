@@ -1,6 +1,6 @@
 spring:
-  appkication:
+  application:
     name: notification
 
 server:
-  port 8086
+  port: 8086
