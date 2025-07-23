@@ -1,0 +1,7 @@
+spring:
+  profile: dev
+  application:
+    name: notification
+
+server:
+  port: 8086
